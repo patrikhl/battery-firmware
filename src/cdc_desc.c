@@ -164,20 +164,21 @@ ALIGNED(4) uint8_t USB_FsConfigDescriptor[] = {
 /**
  * USB String Descriptor (optional)
  */
+/*
 ALIGNED(4) const uint8_t USB_StringDescriptor[] = {
-	/* Index 0x00: LANGID Codes */
-	0x04,								/* bLength */
-	USB_STRING_DESCRIPTOR_TYPE,			/* bDescriptorType */
-	WBVAL(0x0409),	/* US English */    /* wLANGID */
-	/* Index 0x01: Manufacturer */
-	(3 * 2 + 2),						/* bLength (13 Char + Type + lenght) */
-	USB_STRING_DESCRIPTOR_TYPE,			/* bDescriptorType */
+	// Index 0x00: LANGID Codes
+	0x04,								// bLength
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	WBVAL(0x0409),						// wLANGID (US English)
+	// Index 0x01: Manufacturer
+	(3 * 2 + 2),						// bLength (13 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
 	'N', 0,
 	'X', 0,
 	'P', 0,
-	/* Index 0x02: Product */
-	(9 * 2 + 2),						/* bLength */
-	USB_STRING_DESCRIPTOR_TYPE,			/* bDescriptorType */
+	// Index 0x02: Product
+	(9 * 2 + 2),						// bLength
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
 	'V', 0,
 	'C', 0,
 	'O', 0,
@@ -187,20 +188,81 @@ ALIGNED(4) const uint8_t USB_StringDescriptor[] = {
 	'o', 0,
 	'r', 0,
 	't', 0,
-	/* Index 0x03: Serial Number */
-	(6 * 2 + 2),						/* bLength (8 Char + Type + lenght) */
-	USB_STRING_DESCRIPTOR_TYPE,			/* bDescriptorType */
+	// Index 0x03: Serial Number
+	(6 * 2 + 2),						// bLength (8 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
 	'N', 0,
 	'X', 0,
 	'P', 0,
 	'-', 0,
 	'7', 0,
 	'7', 0,
-	/* Index 0x04: Interface 1, Alternate Setting 0 */
-	( 4 * 2 + 2),						/* bLength (4 Char + Type + lenght) */
-	USB_STRING_DESCRIPTOR_TYPE,			/* bDescriptorType */
+	// Index 0x04: Interface 1, Alternate Setting 0
+	( 4 * 2 + 2),						// bLength (4 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
 	'V', 0,
 	'C', 0,
 	'O', 0,
 	'M', 0,
+};
+*/
+ALIGNED(4) const uint8_t USB_StringDescriptor[] = {
+	// Index 0x00: LANGID Codes
+	0x04,								// bLength
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	WBVAL(0x0409),						// wLANGID (US English)
+	// Index 0x01: Manufacturer
+	(23 * 2 + 2),						// bLength (13 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	'D', 0,
+	'a', 0,
+	'n', 0,
+	'i', 0,
+	's', 0,
+	'h', 0,
+	' ', 0,
+	'A', 0,
+	'v', 0,
+	'i', 0,
+	'a', 0,
+	't', 0,
+	'i', 0,
+	'o', 0,
+	'n', 0,
+	' ', 0,
+	'S', 0,
+	'y', 0,
+	's', 0,
+	't', 0,
+	'e', 0,
+	'm', 0,
+	's', 0,
+	// Index 0x02: Product
+	(7 * 2 + 2),						// bLength
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	'B', 0,
+	'a', 0,
+	't', 0,
+	't', 0,
+	'e', 0,
+	'r', 0,
+	'y', 0,
+	// Index 0x03: Serial Number
+	(6 * 2 + 2),						// bLength (8 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	'A', 0,
+	'B', 0,
+	'C', 0,
+	'1', 0,
+	'2', 0,
+	'3', 0,
+/*
+	// Index 0x04: Interface 1, Alternate Setting 0
+	( 4 * 2 + 2),						// bLength (4 Char + Type + lenght)
+	USB_STRING_DESCRIPTOR_TYPE,			// bDescriptorType
+	'V', 0,
+	'C', 0,
+	'O', 0,
+	'M', 0,
+*/
 };
