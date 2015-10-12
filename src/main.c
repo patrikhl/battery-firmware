@@ -15,10 +15,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "app_usbd_cfg.h"
-#include "hid_generic.h"
+#include "cdc_vcom.h"
 
 // public usb types/enumerations/variables
 static USBD_HANDLE_T g_hUsb;
+static uint8_t g_rxBuff[256];
 const  USBD_API_T *g_pUsbApi;
 
 /**
@@ -30,7 +31,8 @@ void USB_IRQHandler() {
 }
 
 /* Find the address of interface descriptor for given class type. */
-USB_INTERFACE_DESCRIPTOR *find_IntfDesc(const uint8_t *pDesc, uint32_t intfClass) {
+USB_INTERFACE_DESCRIPTOR *find_IntfDesc(const uint8_t *pDesc, uint32_t intfClass)
+{
 	USB_COMMON_DESCRIPTOR *pD;
 	USB_INTERFACE_DESCRIPTOR *pIntfDesc = 0;
 	uint32_t next_desc_adr;
@@ -61,10 +63,10 @@ USB_INTERFACE_DESCRIPTOR *find_IntfDesc(const uint8_t *pDesc, uint32_t intfClass
  * @return	Function should not exit.
  */
 int main() {
-	// usb variables
 	USBD_API_INIT_PARAM_T usb_param;
 	USB_CORE_DESCS_T desc;
 	ErrorCode_t ret = LPC_OK;
+	uint32_t prompt = 0, rdCnt = 0;
 
     // read clock settings and update SystemCoreClock variable
     SystemCoreClockUpdate();
@@ -90,30 +92,26 @@ int main() {
 		to avoid data corruption. Corruption of padding memory doesn’t affect the
 		stack/program behaviour.
 	 */
-	usb_param.max_num_ep = 2 + 1;
+	usb_param.max_num_ep = 3 + 1;
 	usb_param.mem_base = USB_STACK_MEM_BASE;
 	usb_param.mem_size = USB_STACK_MEM_SIZE;
 
 	/* Set the USB descriptors */
-	desc.device_desc = (uint8_t *) USB_DeviceDescriptor;
-	desc.string_desc = (uint8_t *) USB_StringDescriptor;
-
+	desc.device_desc = (uint8_t *) &USB_DeviceDescriptor[0];
+	desc.string_desc = (uint8_t *) &USB_StringDescriptor[0];
 	/* Note, to pass USBCV test full-speed only devices should have both
-	 * descriptor arrays point to same location and device_qualifier set
-	 * to 0.
+	   descriptor arrays point to same location and device_qualifier set to 0.
 	 */
-	desc.high_speed_desc = USB_FsConfigDescriptor;
-	desc.full_speed_desc = USB_FsConfigDescriptor;
+	desc.high_speed_desc = (uint8_t *) &USB_FsConfigDescriptor[0];
+	desc.full_speed_desc = (uint8_t *) &USB_FsConfigDescriptor[0];
 	desc.device_qualifier = 0;
 
 	/* USB Initialization */
 	ret = USBD_API->hw->Init(&g_hUsb, &desc, &usb_param);
 	if (ret == LPC_OK) {
 
-		ret =
-			usb_hid_init(g_hUsb,
-						 (USB_INTERFACE_DESCRIPTOR *) &USB_FsConfigDescriptor[sizeof(USB_CONFIGURATION_DESCRIPTOR)],
-						 &usb_param.mem_base, &usb_param.mem_size);
+		/* Init VCOM interface */
+		ret = vcom_init(g_hUsb, &desc, &usb_param);
 		if (ret == LPC_OK) {
 			/*  enable USB interrupts */
 			NVIC_EnableIRQ(USB0_IRQn);
@@ -121,6 +119,31 @@ int main() {
 			USBD_API->hw->Connect(g_hUsb, 1);
 		}
 
+	}
+
+	DEBUGSTR("USB CDC class based virtual Comm port example!\r\n");
+
+	while (1) {
+		// Check if host has connected and opened the VCOM port
+		if ((vcom_connected() != 0)) {
+			vcom_write("Hello World!!\r\n", 15);
+			prompt = 1;
+		}
+		/*
+		// Check if host has connected and opened the VCOM port
+		if ((vcom_connected() != 0) && (prompt == 0)) {
+			vcom_write("Hello World!!\r\n", 15);
+			prompt = 1;
+		}
+		// If VCOM port is opened echo whatever we receive back to host.
+		if (prompt) {
+			rdCnt = vcom_bread(&g_rxBuff[0], 256);
+			if (rdCnt) {
+				vcom_write(&g_rxBuff[0], rdCnt);
+			}
+		}*/
+		// Sleep until next IRQ happens
+		__WFI();
 	}
 
     // loop forever and ever to prevent main from exiting
