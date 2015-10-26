@@ -4,7 +4,9 @@
  *  Created on: 13/10/2015
  *      Author: P&N
  */
-
+#include <stdint.h>
+#include "board.h"
+#include "chip.h"
 /* I2CM transfer record */
 static I2CM_XFER_T  i2cmXferRec;
 /* I2C clock is set to 1.8MHz */
@@ -16,11 +18,7 @@ static I2CM_XFER_T  i2cmXferRec;
 /* 7-bit I2C address of EEPROM */
 #define I2C_EEPROM_ADRESS  (0b1010000)
 
-static void Init_I2C_PinMux(void);
-
-
-
-static void setupI2CMaster();
+static void I2C_Init();
 
 static void SetupXferRecAndExecute(uint8_t devAddr,
 								   uint8_t *txBuffPtr,

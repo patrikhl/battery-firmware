@@ -8,11 +8,35 @@
 */
 
 #include "board.h"
-#include "i2c.h"
+//#include "i2c.h"
+#include "adc.h"
+#include "rtc.h"
 #include <cr_section_macros.h>
+
+#define adcChannel 0
+#define TICKRATE_HZ (100)
+static bool sequence0Complete;
+
 // TODO: insert other include files here
 
 // TODO: insert other definitions and declarations here
+
+
+//void ADC0A_IRQHandler(void)
+//{
+//	uint32_t pending;
+//
+//	/* Get pending interrupts */
+//	pending = Chip_ADC_GetFlags(LPC_ADC0);
+//
+//	/* Sequence A completion interrupt */
+//	if (pending & ADC_FLAGS_SEQA_INT_MASK) {
+//		sequence0Complete = true;
+//	}
+//
+//	/* Clear any pending interrupts */
+//	Chip_ADC_ClearFlags(LPC_ADC0, pending);
+//}
 
 int main(void) {
     // read clock settings and update SystemCoreClock variable
@@ -21,25 +45,21 @@ int main(void) {
     // functions related to the board hardware
     Board_Init();
 
-    /*****************************************************************************
-     * I2C init
-     ****************************************************************************/
+    //  I2C_Init();
 
-    /* Setup I2C pin muxing */
-    Init_I2C_PinMux();
+    //   ADC_Init();
 
-    /* Allocate I2C handle, setup I2C rate, and initialize I2C clocking */
-    setupI2CMaster();
+    RTC_Init();
 
-    /* Disable the interrupt for the I2C */
-    NVIC_DisableIRQ(I2C0_IRQn);
 
-    /*****************************************************************************
-     * I2C init
-     *****************************************************************************/
+    uint32_t time;
 
-  	/* Loop forever */
-  	while (1);
+    while(1)
+    {
+    	time = getTime();
+
+    }
+
 
 
     return 0;
