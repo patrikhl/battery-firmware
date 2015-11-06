@@ -6,9 +6,10 @@
  */
 #include <stdint.h>
 #include "board.h"
-#include "chip.h"
+#include "string.h"
+
 /* I2CM transfer record */
-static I2CM_XFER_T  i2cmXferRec;
+I2CM_XFER_T  i2cmXferRec;
 /* I2C clock is set to 1.8MHz */
 #define I2C_CLK_DIVIDER         (40)
 /* 100KHz I2C bit-rate */
@@ -18,16 +19,16 @@ static I2CM_XFER_T  i2cmXferRec;
 /* 7-bit I2C address of EEPROM */
 #define I2C_EEPROM_ADRESS  (0b1010000)
 
-static void I2C_Init();
+void I2C_Init();
 
-static void SetupXferRecAndExecute(uint8_t devAddr,
+void SetupXferRecAndExecute(uint8_t devAddr,
 								   uint8_t *txBuffPtr,
 								   uint16_t txSize,
 								   uint8_t *rxBuffPtr,
 								   uint16_t rxSize);
 
-static void ReadI2C(uint16_t page, uint8_t *data);
+void ReadI2C(uint16_t page, uint8_t *data);
 
-static void WriteI2C(uint16_t page, uint8_t *data);
+void WriteI2C(uint16_t page, uint8_t *data);
 
 
