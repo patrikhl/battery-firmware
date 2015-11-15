@@ -304,7 +304,7 @@ int USB_Init()
 	return ret;
 }
 
-/* Check if libusbdev is connected USB host application. */
+// check if the usb is connected to a host application
 bool USB_Connected()
 {
 	return USB_IsConfigured(g_lusb.hUsb);

@@ -45,6 +45,9 @@
 /* Application defined LUSB interrupt status  */
 #define LUSB_DATA_PENDING		_BIT(0)
 
+/* Packet buffer for processing */
+static uint8_t g_rxBuff[PACKET_BUFFER_SIZE];
+
 /*****************************************************************************
  * Public types/enumerations/variables
  ****************************************************************************/
@@ -63,18 +66,16 @@
  */
 int main()
 {
-	// firmware version
-	float firmware = 0.1;
-	// battery ID and name
-	char ID[] = "BAT123";
-	char name[10] = "";
-	// time info
-	int currentTime = 1447614357;
-	int lastSyncTime = 1447614356;
-	// capacity info
-	uint16_t capacity = 1500;
-	uint16_t lastFullCap = 3000;
-	uint16_t factoryFullCap = 3000;
+	BatteryInfo batteryInfo;
+	batteryInfo.fwVersInt = 0;
+	batteryInfo.fwVersDec = 1;
+	strcpy(batteryInfo.ID, "BAT123");
+	strcpy(batteryInfo.ID, "Battery Name");
+	batteryInfo.currentTime = 1447614357;
+	batteryInfo.lastSyncTime = 1447614356;
+	batteryInfo.capacity = 1500;
+	batteryInfo.lastFullCap = 3000;
+	batteryInfo.factoryFullCap = 3000;
 
 	// initialize board and chip
 	Board_Init();
@@ -87,5 +88,13 @@ int main()
 
 	while (1) {
 //		__WFI();
+		while (USB_Connected()) {
+			if (libusbdev_QueueReadDone() != -1) {
+
+				/* Dummy process read data ......*/
+				/* requeue read request */
+				libusbdev_QueueReadReq(g_rxBuff, PACKET_BUFFER_SIZE);
+			}
+		}
 	}
 }
