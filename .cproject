@@ -32,10 +32,10 @@
 									<listOptionValue builtIn="false" value="__LPC15XX__"/>
 									<listOptionValue builtIn="false" value="__REDLIB__"/>
 								</option>
-								<option id="gnu.c.compiler.option.misc.other.1586041518" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections" valueType="string"/>
-								<option id="com.crt.advproject.gcc.hdrlib.1611057737" superClass="com.crt.advproject.gcc.hdrlib" value="Redlib" valueType="enumerated"/>
-								<option id="com.crt.advproject.gcc.specs.611365320" superClass="com.crt.advproject.gcc.specs" value="com.crt.advproject.gcc.specs.codered" valueType="enumerated"/>
-								<option id="gnu.c.compiler.option.include.paths.1797912930" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.c.compiler.option.misc.other.1586041518" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -std=c99" valueType="string"/>
+								<option id="com.crt.advproject.gcc.hdrlib.1611057737" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib" value="com.crt.advproject.gcc.hdrlib.codered" valueType="enumerated"/>
+								<option id="com.crt.advproject.gcc.specs.611365320" name="Specs" superClass="com.crt.advproject.gcc.specs" value="com.crt.advproject.gcc.specs.codered" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.1797912930" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/inc}&quot;"/>
@@ -46,9 +46,9 @@
 								<option id="com.crt.advproject.gas.arch.4573963" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm3" valueType="enumerated"/>
 								<option id="com.crt.advproject.gas.thumb.244481917" name="Thumb mode" superClass="com.crt.advproject.gas.thumb" value="true" valueType="boolean"/>
 								<option id="gnu.both.asm.option.flags.crt.1483340087" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -DDEBUG -D__CODE_RED -DCORE_M3 -D__USE_LPCOPEN -D__LPC15XX__ -D__REDLIB__" valueType="string"/>
-								<option id="com.crt.advproject.gas.hdrlib.1689177192" superClass="com.crt.advproject.gas.hdrlib" value="Redlib" valueType="enumerated"/>
-								<option id="com.crt.advproject.gas.specs.432661429" superClass="com.crt.advproject.gas.specs" value="com.crt.advproject.gas.specs.codered" valueType="enumerated"/>
-								<option id="gnu.both.asm.option.include.paths.131175418" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="com.crt.advproject.gas.hdrlib.1689177192" name="Library headers" superClass="com.crt.advproject.gas.hdrlib" value="Redlib" valueType="enumerated"/>
+								<option id="com.crt.advproject.gas.specs.432661429" name="Specs" superClass="com.crt.advproject.gas.specs" value="com.crt.advproject.gas.specs.codered" valueType="enumerated"/>
+								<option id="gnu.both.asm.option.include.paths.131175418" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/inc}&quot;"/>
@@ -61,7 +61,7 @@
 								<option id="com.crt.advproject.link.gcc.multicore.master.userobjs.593172252" name="Slave Objects (not visible)" superClass="com.crt.advproject.link.gcc.multicore.master.userobjs" valueType="userObjs"/>
 								<option id="com.crt.advproject.link.arch.52653863" name="Architecture" superClass="com.crt.advproject.link.arch" value="com.crt.advproject.link.target.cm3" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.1027515384" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.script.1656990730" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;RemixToIgnition_Debug.ld&quot;" valueType="string"/>
+								<option id="com.crt.advproject.link.script.1656990730" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;battery-firmware_Debug.ld&quot;" valueType="string"/>
 								<option id="com.crt.advproject.link.manage.1397962999" name="Manage linker script" superClass="com.crt.advproject.link.manage" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.nostdlibs.38802322" name="No startup or default libs (-nostdlib)" superClass="gnu.c.link.option.nostdlibs" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.other.1810725929" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList">
@@ -69,16 +69,16 @@
 									<listOptionValue builtIn="false" value="--gc-sections"/>
 								</option>
 								<option id="com.crt.advproject.link.gcc.hdrlib.1621598217" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.none" valueType="enumerated"/>
-								<option id="gnu.c.link.option.libs.308807792" superClass="gnu.c.link.option.libs" valueType="libs">
+								<option id="gnu.c.link.option.libs.308807792" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="lpc_board_nxp_lpcxpresso_1549"/>
 									<listOptionValue builtIn="false" value="lpc_chip_15xx"/>
 								</option>
-								<option id="gnu.c.link.option.paths.381412704" superClass="gnu.c.link.option.paths" valueType="libPaths">
+								<option id="gnu.c.link.option.paths.381412704" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/Debug}&quot;"/>
 								</option>
-								<option id="com.crt.advproject.link.crpenable.1475741621" superClass="com.crt.advproject.link.crpenable" value="true" valueType="boolean"/>
-								<option id="com.crt.advproject.link.gcc.multicore.slave.1257491503" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
+								<option id="com.crt.advproject.link.crpenable.1475741621" name="Enable Code Read Protect" superClass="com.crt.advproject.link.crpenable" value="false" valueType="boolean"/>
+								<option id="com.crt.advproject.link.gcc.multicore.slave.1257491503" name="Multicore configuration" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1829143742" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -126,9 +126,9 @@
 									<listOptionValue builtIn="false" value="__REDLIB__"/>
 								</option>
 								<option id="gnu.c.compiler.option.misc.other.1331800084" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections" valueType="string"/>
-								<option id="com.crt.advproject.gcc.hdrlib.758655909" superClass="com.crt.advproject.gcc.hdrlib" value="Redlib" valueType="enumerated"/>
-								<option id="com.crt.advproject.gcc.specs.1750923798" superClass="com.crt.advproject.gcc.specs" value="com.crt.advproject.gcc.specs.codered" valueType="enumerated"/>
-								<option id="gnu.c.compiler.option.include.paths.1993180926" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="com.crt.advproject.gcc.hdrlib.758655909" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib" value="Redlib" valueType="enumerated"/>
+								<option id="com.crt.advproject.gcc.specs.1750923798" name="Specs" superClass="com.crt.advproject.gcc.specs" value="com.crt.advproject.gcc.specs.codered" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.1993180926" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/inc}&quot;"/>
@@ -139,9 +139,9 @@
 								<option id="com.crt.advproject.gas.arch.1811148109" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm3" valueType="enumerated"/>
 								<option id="com.crt.advproject.gas.thumb.1358567627" name="Thumb mode" superClass="com.crt.advproject.gas.thumb" value="true" valueType="boolean"/>
 								<option id="gnu.both.asm.option.flags.crt.1188106786" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -DNDEBUG -D__CODE_RED -DCORE_M3 -D__USE_LPCOPEN -D__LPC15XX__ -D__REDLIB__" valueType="string"/>
-								<option id="com.crt.advproject.gas.hdrlib.1024861587" superClass="com.crt.advproject.gas.hdrlib" value="Redlib" valueType="enumerated"/>
-								<option id="com.crt.advproject.gas.specs.37559330" superClass="com.crt.advproject.gas.specs" value="com.crt.advproject.gas.specs.codered" valueType="enumerated"/>
-								<option id="gnu.both.asm.option.include.paths.1868549222" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="com.crt.advproject.gas.hdrlib.1024861587" name="Library headers" superClass="com.crt.advproject.gas.hdrlib" value="Redlib" valueType="enumerated"/>
+								<option id="com.crt.advproject.gas.specs.37559330" name="Specs" superClass="com.crt.advproject.gas.specs" value="com.crt.advproject.gas.specs.codered" valueType="enumerated"/>
+								<option id="gnu.both.asm.option.include.paths.1868549222" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/inc}&quot;"/>
@@ -162,15 +162,15 @@
 									<listOptionValue builtIn="false" value="--gc-sections"/>
 								</option>
 								<option id="com.crt.advproject.link.gcc.hdrlib.1214746368" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.none" valueType="enumerated"/>
-								<option id="gnu.c.link.option.libs.2130980137" superClass="gnu.c.link.option.libs" valueType="libs">
+								<option id="gnu.c.link.option.libs.2130980137" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="lpc_board_nxp_lpcxpresso_1549"/>
 									<listOptionValue builtIn="false" value="lpc_chip_15xx"/>
 								</option>
-								<option id="gnu.c.link.option.paths.35953702" superClass="gnu.c.link.option.paths" valueType="libPaths">
+								<option id="gnu.c.link.option.paths.35953702" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_board_nxp_lpcxpresso_1549/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lpc_chip_15xx/Release}&quot;"/>
 								</option>
-								<option id="com.crt.advproject.link.crpenable.1007698139" superClass="com.crt.advproject.link.crpenable" value="true" valueType="boolean"/>
+								<option id="com.crt.advproject.link.crpenable.1007698139" name="Enable Code Read Protect" superClass="com.crt.advproject.link.crpenable" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.244862439" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -190,9 +190,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="RemixToIgnition.com.crt.advproject.projecttype.exe.1654664041" name="Executable" projectType="com.crt.advproject.projecttype.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.crt.config">
 		<projectStorage>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&#13;
@@ -210,44 +207,44 @@
 &lt;memoryInstance derived_from="RAM" id="Ram0_16" location="0x2000000" size="0x4000"/&gt;&#13;
 &lt;memoryInstance derived_from="RAM" id="Ram1_16" location="0x2004000" size="0x4000"/&gt;&#13;
 &lt;memoryInstance derived_from="RAM" id="Ram2_4" location="0x2008000" size="0x1000"/&gt;&#13;
-&lt;peripheralInstance derived_from="V7M_MPU" determined="infoFile" id="MPU" location="0xe000ed90"/&gt;&#13;
-&lt;peripheralInstance derived_from="V7M_NVIC" determined="infoFile" id="NVIC" location="0xe000e000"/&gt;&#13;
-&lt;peripheralInstance derived_from="V7M_DCR" determined="infoFile" id="DCR" location="0xe000edf0"/&gt;&#13;
-&lt;peripheralInstance derived_from="V7M_ITM" determined="infoFile" id="ITM" location="0xe0000000"/&gt;&#13;
-&lt;peripheralInstance derived_from="GPIO-PORT" determined="infoFile" id="GPIO-PORT" location="0x1c000000"/&gt;&#13;
-&lt;peripheralInstance derived_from="DMA" determined="infoFile" id="DMA" location="0x1c004000"/&gt;&#13;
-&lt;peripheralInstance derived_from="USB" determined="infoFile" id="USB" location="0x1c00c000"/&gt;&#13;
-&lt;peripheralInstance derived_from="CRC" determined="infoFile" id="CRC" location="0x1c010000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SCT0" determined="infoFile" id="SCT0" location="0x1c018000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SCT1" determined="infoFile" id="SCT1" location="0x1c01c000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SCT2" determined="infoFile" id="SCT2" location="0x1c020000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SCT3" determined="infoFile" id="SCT3" location="0x1c024000"/&gt;&#13;
-&lt;peripheralInstance derived_from="ADC0" determined="infoFile" id="ADC0" location="0x40000000"/&gt;&#13;
-&lt;peripheralInstance derived_from="DAC" determined="infoFile" id="DAC" location="0x40004000"/&gt;&#13;
-&lt;peripheralInstance derived_from="ACMP" determined="infoFile" id="ACMP" location="0x40008000"/&gt;&#13;
-&lt;peripheralInstance derived_from="INMUX" determined="infoFile" id="INMUX" location="0x40014000"/&gt;&#13;
-&lt;peripheralInstance derived_from="RTC" determined="infoFile" id="RTC" location="0x40028000"/&gt;&#13;
-&lt;peripheralInstance derived_from="WWDT" determined="infoFile" id="WWDT" location="0x4002c000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SWM" determined="infoFile" id="SWM" location="0x40038000"/&gt;&#13;
-&lt;peripheralInstance derived_from="PMU" determined="infoFile" id="PMU" location="0x4003c000"/&gt;&#13;
-&lt;peripheralInstance derived_from="USART0" determined="infoFile" id="USART0" location="0x40040000"/&gt;&#13;
-&lt;peripheralInstance derived_from="USART1" determined="infoFile" id="USART1" location="0x40044000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SPI0" determined="infoFile" id="SPI0" location="0x40048000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SPI1" determined="infoFile" id="SPI1" location="0x4004c000"/&gt;&#13;
-&lt;peripheralInstance derived_from="I2C0" determined="infoFile" id="I2C0" location="0x40050000"/&gt;&#13;
-&lt;peripheralInstance derived_from="QEI" determined="infoFile" id="QEI" location="0x40058000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SYSCON" determined="infoFile" id="SYSCON" location="0x40074000"/&gt;&#13;
-&lt;peripheralInstance derived_from="ADC1" determined="infoFile" id="ADC1" location="0x40080000"/&gt;&#13;
-&lt;peripheralInstance derived_from="MRT" determined="infoFile" id="MRT" location="0x400a0000"/&gt;&#13;
-&lt;peripheralInstance derived_from="PINT" determined="infoFile" id="PINT" location="0x400a4000"/&gt;&#13;
-&lt;peripheralInstance derived_from="GINT0" determined="infoFile" id="GINT0" location="0x400a8000"/&gt;&#13;
-&lt;peripheralInstance derived_from="GINT1" determined="infoFile" id="GINT1" location="0x400ac000"/&gt;&#13;
-&lt;peripheralInstance derived_from="RIT" determined="infoFile" id="RIT" location="0x400b4000"/&gt;&#13;
-&lt;peripheralInstance derived_from="SCTIPU" determined="infoFile" id="SCTIPU" location="0x400b8000"/&gt;&#13;
-&lt;peripheralInstance derived_from="FLASHCTRL" determined="infoFile" id="FLASHCTRL" location="0x400bc000"/&gt;&#13;
-&lt;peripheralInstance derived_from="USART2" determined="infoFile" id="USART2" location="0x400c0000"/&gt;&#13;
-&lt;peripheralInstance derived_from="C-CAN0" determined="infoFile" id="C-CAN0" location="0x400f0000"/&gt;&#13;
-&lt;peripheralInstance derived_from="IOCON" determined="infoFile" id="IOCON" location="0x400f8000"/&gt;&#13;
+&lt;peripheralInstance derived_from="V7M_MPU" id="MPU" location="0xe000ed90"/&gt;&#13;
+&lt;peripheralInstance derived_from="V7M_NVIC" id="NVIC" location="0xe000e000"/&gt;&#13;
+&lt;peripheralInstance derived_from="V7M_DCR" id="DCR" location="0xe000edf0"/&gt;&#13;
+&lt;peripheralInstance derived_from="V7M_ITM" id="ITM" location="0xe0000000"/&gt;&#13;
+&lt;peripheralInstance derived_from="GPIO-PORT" id="GPIO-PORT" location="0x1c000000"/&gt;&#13;
+&lt;peripheralInstance derived_from="DMA" id="DMA" location="0x1c004000"/&gt;&#13;
+&lt;peripheralInstance derived_from="USB" id="USB" location="0x1c00c000"/&gt;&#13;
+&lt;peripheralInstance derived_from="CRC" id="CRC" location="0x1c010000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SCT0" id="SCT0" location="0x1c018000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SCT1" id="SCT1" location="0x1c01c000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SCT2" id="SCT2" location="0x1c020000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SCT3" id="SCT3" location="0x1c024000"/&gt;&#13;
+&lt;peripheralInstance derived_from="ADC0" id="ADC0" location="0x40000000"/&gt;&#13;
+&lt;peripheralInstance derived_from="DAC" id="DAC" location="0x40004000"/&gt;&#13;
+&lt;peripheralInstance derived_from="ACMP" id="ACMP" location="0x40008000"/&gt;&#13;
+&lt;peripheralInstance derived_from="INMUX" id="INMUX" location="0x40014000"/&gt;&#13;
+&lt;peripheralInstance derived_from="RTC" id="RTC" location="0x40028000"/&gt;&#13;
+&lt;peripheralInstance derived_from="WWDT" id="WWDT" location="0x4002c000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SWM" id="SWM" location="0x40038000"/&gt;&#13;
+&lt;peripheralInstance derived_from="PMU" id="PMU" location="0x4003c000"/&gt;&#13;
+&lt;peripheralInstance derived_from="USART0" id="USART0" location="0x40040000"/&gt;&#13;
+&lt;peripheralInstance derived_from="USART1" id="USART1" location="0x40044000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SPI0" id="SPI0" location="0x40048000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SPI1" id="SPI1" location="0x4004c000"/&gt;&#13;
+&lt;peripheralInstance derived_from="I2C0" id="I2C0" location="0x40050000"/&gt;&#13;
+&lt;peripheralInstance derived_from="QEI" id="QEI" location="0x40058000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SYSCON" id="SYSCON" location="0x40074000"/&gt;&#13;
+&lt;peripheralInstance derived_from="ADC1" id="ADC1" location="0x40080000"/&gt;&#13;
+&lt;peripheralInstance derived_from="MRT" id="MRT" location="0x400a0000"/&gt;&#13;
+&lt;peripheralInstance derived_from="PINT" id="PINT" location="0x400a4000"/&gt;&#13;
+&lt;peripheralInstance derived_from="GINT0" id="GINT0" location="0x400a8000"/&gt;&#13;
+&lt;peripheralInstance derived_from="GINT1" id="GINT1" location="0x400ac000"/&gt;&#13;
+&lt;peripheralInstance derived_from="RIT" id="RIT" location="0x400b4000"/&gt;&#13;
+&lt;peripheralInstance derived_from="SCTIPU" id="SCTIPU" location="0x400b8000"/&gt;&#13;
+&lt;peripheralInstance derived_from="FLASHCTRL" id="FLASHCTRL" location="0x400bc000"/&gt;&#13;
+&lt;peripheralInstance derived_from="USART2" id="USART2" location="0x400c0000"/&gt;&#13;
+&lt;peripheralInstance derived_from="C-CAN0" id="C-CAN0" location="0x400f0000"/&gt;&#13;
+&lt;peripheralInstance derived_from="IOCON" id="IOCON" location="0x400f8000"/&gt;&#13;
 &lt;/chip&gt;&#13;
 &lt;processor&gt;&lt;name gcc_name="cortex-m3"&gt;Cortex-M3&lt;/name&gt;&#13;
 &lt;family&gt;Cortex-M&lt;/family&gt;&#13;
@@ -257,5 +254,21 @@
 &lt;/infoList&gt;&#13;
 &lt;/TargetConfig&gt;</projectStorage>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/battery-firmware"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/battery-firmware"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1304762566;com.crt.advproject.config.exe.debug.1304762566.;com.crt.advproject.gas.exe.debug.2144277754;com.crt.advproject.assembler.input.1815439026">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1304762566;com.crt.advproject.config.exe.debug.1304762566.;com.crt.advproject.gcc.exe.debug.480534831;com.crt.advproject.compiler.input.952729994">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>

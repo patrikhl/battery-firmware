@@ -40,29 +40,19 @@ extern "C"
 {
 #endif
 
-/** @ingroup EXAMPLES_USBDROM_15XX_CDC
+/** @ingroup EXAMPLES_USBDROM_15XX_HID_GENERIC
  * @{
  */
 
-/* Manifest constants used by USBD ROM stack. These values SHOULD NOT BE CHANGED
-   for advance features which require usage of USB_CORE_CTRL_T structure.
-   Since these are the values used for compiling USB stack.
- */
-#define USB_MAX_IF_NUM          8		/*!< Max interface number used for building USBD ROM. DON'T CHANGE. */
-#define USB_MAX_EP_NUM          5		/*!< Max number of EP used for building USBD ROM. DON'T CHANGE. */
-#define USB_MAX_PACKET0         64		/*!< Max EP0 packet size used for building USBD ROM. DON'T CHANGE. */
-#define USB_FS_MAX_BULK_PACKET  64		/*!< MAXP for FS bulk EPs used for building USBD ROM. DON'T CHANGE. */
-#define USB_HS_MAX_BULK_PACKET  512		/*!< MAXP for HS bulk EPs used for building USBD ROM. DON'T CHANGE. */
-#define USB_DFU_XFER_SIZE       2048	/*!< Max DFU transfer size used for building USBD ROM. DON'T CHANGE. */
+/* Manifest constants to select appropriate USB instance */
+#define LPC_USB_BASE            LPC_USB0_BASE
+#define LPC_USB_IRQ             USB0_IRQn
+#define USB_init_pin_clk        Chip_USB0_Init
 
-/* Manifest constants defining interface numbers and endpoints used by a
-   particular interface in this application.
- */
-#define USB_CDC_CIF_NUM         0
-#define USB_CDC_DIF_NUM         1
-#define USB_CDC_IN_EP           0x81
-#define USB_CDC_OUT_EP          0x01
-#define USB_CDC_INT_EP          0x82
+#define USB_PID					0x84
+#define USB_IN_EP				USB_ENDPOINT_IN(1)
+#define USB_OUT_EP				USB_ENDPOINT_OUT(1)
+#define USB_INT_EP				USB_ENDPOINT_IN(2)
 
 /* The following manifest constants are used to define this memory area to be used
    by USBD ROM stack.
@@ -70,20 +60,25 @@ extern "C"
 #define USB_STACK_MEM_BASE      0x02008000
 #define USB_STACK_MEM_SIZE      0x1000
 
+/* Manifest constants used by USBD ROM stack. These values SHOULD NOT BE CHANGED
+   for advance features which require usage of USB_CORE_CTRL_T structure.
+   Since these are the values used for compiling USB stack.
+ */
+#define USB_MAX_IF_NUM          8		/*!< Max interface number used for building USBDL_Lib. DON'T CHANGE. */
+#define USB_MAX_EP_NUM          5		/*!< Max number of EP used for building USBD ROM. DON'T CHANGE. */
+#define USB_MAX_PACKET0         64		/*!< Max EP0 packet size used for building USBD ROM. DON'T CHANGE. */
+#define USB_FS_MAX_BULK_PACKET  64		/*!< MAXP for FS bulk EPs used for building USBD ROM. DON'T CHANGE. */
+#define USB_HS_MAX_BULK_PACKET  512		/*!< MAXP for HS bulk EPs used for building USBD ROM. DON'T CHANGE. */
+#define USB_DFU_XFER_SIZE       2048	/*!< Max DFU transfer size used for building USBD ROM. DON'T CHANGE. */
+
 /* USB descriptor arrays defined *_desc.c file */
 extern const uint8_t USB_DeviceDescriptor[];
+extern uint8_t USB_HsConfigDescriptor[];
 extern uint8_t USB_FsConfigDescriptor[];
 extern const uint8_t USB_StringDescriptor[];
 extern const uint8_t USB_DeviceQualifier[];
-
-/**
- * @brief	Find the address of interface descriptor for given class type.
- * @param	pDesc		: Pointer to configuration descriptor in which the desired class
- *			interface descriptor to be found.
- * @param	intfClass	: Interface class type to be searched.
- * @return	If found returns the address of requested interface else returns NULL.
- */
-extern USB_INTERFACE_DESCRIPTOR *find_IntfDesc(const uint8_t *pDesc, uint32_t intfClass);
+extern const uint8_t WCID_String_Descriptor[];
+extern const uint8_t WCID_CompatID_Descriptor[];
 
 /**
  * @}
