@@ -8,25 +8,37 @@
 */
 
 #include "board.h"
+#include "stdbool.h"
 #include "cmp0.h"
 #include "i2c.h"
 #include "adc.h"
 #include "rtc.h"
 #include "deepSleep.h"
+#include "rit.h"
+#include "mrt.h"
+#include "fuelgauge.h"
+
+bool ritint = false;
+bool newDataHeader = true;
+uint8_t BatteryCapacity = 1;
+
+
 #include <cr_section_macros.h>
 
 int main(void)
 {
 //Init peripherals
     SystemCoreClockUpdate();
-
-    // set up and initialize all required blocks and peripherals
     Board_Init();
     I2C_Init();
     RTC_Init();
     ADC_Init();
     DeepSleep_Init();
     CMP0_Init();
+    RIT_Init();
+//    MRT_Init();
+    PININT_Init();
+    FuelGauge_Init();
 
 	// declare variables
 	uint16_t voltageC1;
@@ -44,18 +56,26 @@ int main(void)
 	uint8_t bytesOnPage = 2;
 	uint8_t data[128];
 	uint8_t sizeIndex=0;
-	bool newDataHeader = true;
+
 	uint16_t EEPROM_pageNr = 0;
-	// set RTC 1 Hz Alarm
-    Chip_RTC_SetAlarm(LPC_RTC, Chip_RTC_GetCount(LPC_RTC) + 60);
+
+	// set RTC 1 Hz Alarm to 60 sec
+    Chip_RTC_SetAlarm(LPC_RTC, Chip_RTC_GetCount(LPC_RTC) + 10);
+	SCT_StartCounter();
+
 
 	while(1)
 	{
 
-		Board_LED_Set(1, true);
+		//uint32_t clock = Chip_Clock_GetSystemClockRate();
+
+		// TO DO TEST CODE FOR FUELGAUGE
+
 		/* Create data header */
 		if(newDataHeader)
 		{
+			Board_LED_Set(1, false);
+			Board_LED_Set(2, true);
 			if(bytesOnPage > 0)
 				ReadI2C(EEPROM_pageNr, data);
 
@@ -84,8 +104,11 @@ int main(void)
 			newDataHeader = false;
 		}
 
-		if(Chip_ACMP_GetCompStatus(LPC_CMP, CMP_NUMBER))
+		if(ritint && Chip_ACMP_GetCompStatus(LPC_CMP, CMP_NUMBER))
 		{
+			Board_LED_Set(2, false);
+			Board_LED_Toggle(1);
+
 			voltageBufC1 = getCellVoltage(1);
 			voltageBufC2 = getCellVoltage(2);
 			voltageBufC3 = getCellVoltage(3);
@@ -100,12 +123,14 @@ int main(void)
 			voltageC2 = voltageBufC2;
 			voltageC3 = voltageBufC3;
 			voltageC4 = voltageBufC4;
+
+			ritint = false;
 		}
 
 		if(bytesOnPage >= 128)
 		{
 			data[sizeIndex] = dataSize;
-			WriteI2C(EEPROM_pageNr, data);
+			//WriteI2C(EEPROM_pageNr, data);
 
 			EEPROM_pageNr = (EEPROM_pageNr > 1023 ? 0 : EEPROM_pageNr+1);
 
@@ -117,23 +142,25 @@ int main(void)
 			newDataHeader = true;
 		}
 
+
 		if(!Chip_ACMP_GetCompStatus(LPC_CMP, CMP_NUMBER))
 		{
 			if(bytesOnPage > 0)
 			{
 				data[sizeIndex] = dataSize;
-				WriteI2C(EEPROM_pageNr, data);
+				//WriteI2C(EEPROM_pageNr, data);
 			}
 
 			NVIC_EnableIRQ(RTC_ALARM_IRQn);
 
 			newDataHeader = true;
+
 			/* Set new alarm to 60 seconds from now */
-			Chip_RTC_SetAlarm(LPC_RTC, Chip_RTC_GetCount(LPC_RTC) + 60);
-			Board_LED_Set(1, false);
+			Chip_RTC_SetAlarm(LPC_RTC, Chip_RTC_GetCount(LPC_RTC) + 10);
+			//RIT_Disable();
+			NVIC_EnableIRQ(PIN_INT0_IRQn);
 			deepSleep();
 		}
-
 	}
 	return 0;
 }

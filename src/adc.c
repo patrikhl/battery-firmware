@@ -39,10 +39,13 @@ void ADC_Init(){
 	/* Set sample frequency to 1 MHz */
 	Chip_ADC_SetDivider(LPC_ADC0, (Chip_Clock_GetSystemClockRate() / 1000000) - 1);
 
-	Chip_ADC_SetupSequencer(LPC_ADC0, ADC_SEQA_IDX, (ADC_SEQ_CTRL_CHANSEL(0) | ADC_SEQ_CTRL_MODE_EOS));
+	Chip_ADC_SetupSequencer(LPC_ADC0, ADC_SEQA_IDX, (ADC_SEQ_CTRL_CHANSEL(0) /*| ADC_SEQ_CTRL_CHANSEL(1) */ | ADC_SEQ_CTRL_MODE_EOS));
 
 	/* Select pin for ADC0 channel 0 to pin0_8 */
 	Chip_SWM_EnableFixedPin(SWM_FIXED_ADC0_0);
+
+	/* Select pin for ADC0 channel 1 to pin0_7 */
+	//Chip_SWM_Enable_Fixed_pin(SWM_FIXED_ADC0_1);
 
 	/* Need to do a calibration after initialization and trim */
 	Chip_ADC_StartCalibration(LPC_ADC0);
@@ -62,6 +65,8 @@ uint16_t getCellVoltage(uint8_t cellNumber)
 {
 	selectBatteryCell(cellNumber);
 
+	// Insert delay 490 ns
+
 	Chip_ADC_StartSequencer(LPC_ADC0, ADC_SEQA_IDX);
 
 	uint32_t rawSample;
@@ -70,7 +75,26 @@ uint16_t getCellVoltage(uint8_t cellNumber)
 
 	sequence0Complete = false;
 
-	rawSample = Chip_ADC_GetDataReg(LPC_ADC0, adcChannel);
+	rawSample = Chip_ADC_GetDataReg(LPC_ADC0, ADCVOLTAGECH);
+
+	return (uint16_t)(ADC_DR_RESULT(rawSample) >> 2);
+}
+
+uint16_t getCellCurrent(uint8_t cellNumber)
+{
+	selectBatteryCell(cellNumber);
+
+	// Insert delay 490 ns
+
+	Chip_ADC_StartSequencer(LPC_ADC0, ADC_SEQA_IDX);
+
+	uint32_t rawSample;
+
+	while(!sequence0Complete);
+
+	sequence0Complete = false;
+
+	rawSample = Chip_ADC_GetDataReg(LPC_ADC0, ADCCURRENTCH);
 
 	return (uint16_t)(ADC_DR_RESULT(rawSample) >> 2);
 }

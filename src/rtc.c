@@ -18,7 +18,6 @@ void RTC_Init()
 
 	 NVIC_EnableIRQ(RTC_ALARM_IRQn);
 
-	 Chip_SYSCTL_EnableERP1PeriphWakeup(SYSCTL_ERP1_WAKEUP_RTCALARMINT);
 }
 
 inline uint32_t getTime()

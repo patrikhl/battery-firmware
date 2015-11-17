@@ -4,6 +4,10 @@
  *  Created on: 13/10/2015
  *      Author: P&N
  */
+
+#ifndef I2C_H_
+#define I2C_H_
+
 #include <stdint.h>
 #include "board.h"
 #include "string.h"
@@ -31,4 +35,5 @@ void ReadI2C(uint16_t page, uint8_t *data);
 
 void WriteI2C(uint16_t page, uint8_t *data);
 
+#endif /* I2C_H_ */
 

@@ -4,6 +4,10 @@
  *  Created on: 22/10/2015
  *      Author: P&N
  */
+
+#ifndef MUX_H_
+#define MUX_H_
+
 #include "board.h"
 #include "chip.h"
 
@@ -15,3 +19,5 @@
 void Mux_Init();
 
 void selectBatteryCell(uint8_t cellNumber);
+
+#endif /* MUX_H_ */

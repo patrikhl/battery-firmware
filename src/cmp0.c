@@ -45,5 +45,6 @@ void ACMP0_IRQHandler(void)
 {
 	NVIC_DisableIRQ(RTC_ALARM_IRQn);
 	Chip_ACMP_ClearIntFlag(LPC_CMP, CMP_NUMBER);
+	RIT_Enable();
 }
 
