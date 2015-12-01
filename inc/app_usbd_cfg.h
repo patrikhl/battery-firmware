@@ -49,10 +49,10 @@ extern "C"
 #define LPC_USB_IRQ             USB0_IRQn
 #define USB_init_pin_clk        Chip_USB0_Init
 
-#define USB_PID					0x84
-#define USB_IN_EP				USB_ENDPOINT_IN(1)
-#define USB_OUT_EP				USB_ENDPOINT_OUT(1)
-#define USB_INT_EP				USB_ENDPOINT_IN(2)
+#define USB_PID					0x82
+#define USB_IN_EP1				USB_ENDPOINT_IN(1)
+#define USB_OUT_EP1				USB_ENDPOINT_OUT(1)
+#define USB_IN_EP2				USB_ENDPOINT_IN(2)
 
 /* The following manifest constants are used to define this memory area to be used
    by USBD ROM stack.

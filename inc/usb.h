@@ -39,8 +39,26 @@ extern "C"
 {
 #endif
 
-extern uint8_t buffer[5];
+typedef struct _LUSB_CTRL_ {
+	USBD_HANDLE_T hUsb;
+	uint8_t *pTxBuf;
+	uint32_t txBuffLen;
+	uint8_t read;
+	bool newData;
+	bool dataSent;
+	volatile uint8_t connected;
+} LUSB_CTRL_T;
+
 extern USBD_HANDLE_T g_hUsb;
+extern LUSB_CTRL_T g_lusb;
+
+// counter to count the number of bytes read and sent from to eeprom to the usb host
+extern uint16_t readCounter;
+
+// temp buffers to test usb communication
+extern uint8_t buf1[128];
+extern uint8_t buf2[128];
+extern uint8_t buf3[128];
 
 /** @ingroup EXAMPLES_USBDROM_15XX_HID_GENERIC
  * @{
@@ -59,64 +77,25 @@ extern ErrorCode_t USB_Init();
 extern bool USB_Connected();
 
 /**
- * @brief	Queue the read buffer to USB DMA
- * @param	pBuf	: Pointer to buffer where read data should be copied
- * @param	buf_len	: Length of the buffer passed
- * @return	Returns LPC_OK on success.
- */
-extern ErrorCode_t libusbdev_QueueReadReq(uint8_t *pBuf, uint32_t buf_len);
-
-/**
- * @brief	Check if queued read buffer got any data
- * @return	Returns length of data received. Returns -1 if read is still pending.
- * @note	Since on USB, zero length packets are transferred -1 is used for
- *			Rx pending indication.
- */
-extern int32_t libusbdev_QueueReadDone (void);
-
-/**
- * @brief	A blocking read call
- * @param	pBuf	: Pointer to buffer where read data should be copied
- * @param	buf_len	: Length of the buffer passed
- * @return	Return number of bytes read. Returns -1 if previous read is pending.
- */
-extern int32_t libusbdev_Read(uint8_t *pBuf, uint32_t buf_len);
-
-/**
  * @brief	Queue the given buffer for transmission to USB host application.
  * @param	pBuf	: Pointer to buffer to be written
  * @param	buf_len	: Length of the buffer passed
  * @return	Returns LPC_OK on success.
  */
-extern ErrorCode_t libusbdev_QueueSendReq(uint8_t *pBuf, uint32_t buf_len);
+extern ErrorCode_t USB_QueueSendReq(uint8_t *pBuf, uint32_t buf_len);
 
 /**
  * @brief	Check if queued send is done.
  * @return	Returns length of remaining data to be sent.
  *			0 indicates transfer done.
  */
-extern int32_t libusbdev_QueueSendDone (void);
+extern int32_t USB_QueueSendDone();
 
 /**
- * @brief	Send the given buffer to USB host application.
- * @param	pBuf	: Pointer to buffer to be written
- * @param	buf_len	: Length of the buffer passed
+ * @brief	Sends logged data to the host.
  * @return	Returns LPC_OK on success.
- * @note	This is a BLOCKING call until Tx is done.
  */
-extern ErrorCode_t libusbdev_Send(uint8_t *pBuf, uint32_t buf_len);
-
-/**
- * @brief	Send interrupt signal to USB host application.
- * @param	status	: A 32 bit status sent to host at next interrupt
- * @return	Returns LPC_OK on success.
- * @note	USB host polls our device at interval specified
- *			by bInterval field of LUSB_INT_EP endpoint's descriptor.
- *			This routine sends the specified status on next polling opportunity.
- *			Use the routine to tell host we have data to send. So that it can
- *			start putting IN tokens.
- */
-extern ErrorCode_t libusbdev_SendInterrupt(uint32_t status);
+extern int32_t USB_SendLoggedData();
 
 /**
  * @}
